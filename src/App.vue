@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-view></router-view>
+    <vx-footer></vx-footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import vxFooter from '@/components/vx-footer.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+      vxFooter
   }
 }
 </script>
