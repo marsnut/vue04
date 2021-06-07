@@ -13,6 +13,22 @@ Vue.config.productionTip = false
 //Vue.component(Button.name, Button);
 //Vue.component(Select.name, Select);
 
+router.beforeEach((to,from,next) => {
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
+
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters['auth/isLogined']) {
+      next()
+    } else {
+      next('/login')
+    }
+  } else {
+    next()
+  }
+})
+
 new Vue({
   router,
   store,

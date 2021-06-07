@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <vx-header title="main"></vx-header>
     <div>
         <div>Vuex Test</div>
         <div>{{ changedNum }}</div>
@@ -7,9 +8,8 @@
         <el-button @click="mul">-</el-button>
     </div>
 
-    <h1>{{ msg }}</h1>
     <div class="block">
-        <el-button type="success">成功按钮</el-button>
+      <el-button type="success" @click="Toast({message:'success'})">成功按钮</el-button>
         <el-button type="warning">警告按钮</el-button>
         <el-button type="danger">危险按钮</el-button>
         <el-button type="info">信息按钮</el-button>
@@ -101,8 +101,11 @@
 </template>
 
 <script>
+import vxHeader from '@/components/vx-header.vue'
+import {mapGetters} from 'vuex'
+
 export default {
-  name: 'HelloWorld',
+  name: 'home',
   data() {
     const item = {
       date: '2016-05-02',
@@ -114,17 +117,22 @@ export default {
     }
   },
   methods: {
-      add() {
-          this.$store.dispatch('getNewNum',  1);
-      },
-      mul() {
-          this.$store.dispatch('getNewNum',  -1);
-      }
+    add() {
+        this.$store.dispatch('config/getNewNum',  1);
+    },
+    mul() {
+        this.$store.dispatch('config/getNewNum',  -1);
+    },
+    show() {
+    }
   },
   computed: {
-      changedNum() {
-          return this.$store.getters.getChangedNum;
-      }
+    ...mapGetters('config', {
+      changedNum: 'getChangedNum',
+    })
+  },
+  components: {
+    vxHeader
   }
 }
 
